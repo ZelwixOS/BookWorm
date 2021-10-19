@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BookWorm</string>
+    <string name="title_main">Main</string>
+    <string name="title_favourite">Favourite</string>
+    <string name="title_later">Buy Later</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
