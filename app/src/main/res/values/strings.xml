@@ -3,6 +3,14 @@
     <string name="title_main">Main</string>
     <string name="title_favourite">Favourite</string>
     <string name="title_later">Buy Later</string>
+    <string name="book_name">BookName</string>
+    <string name="book_author">BookAuthor</string>
+    <string name="book_price">$100</string>
+    <string name="book_code">Code:</string>
+    <string name="book_code_value">000000</string>
+    <string name="favourite">Favourite</string>
+    <string name="later">Buy later</string>
+    <string name="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

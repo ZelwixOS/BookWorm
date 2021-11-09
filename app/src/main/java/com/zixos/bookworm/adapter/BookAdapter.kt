@@ -2,6 +2,7 @@ package com.zixos.bookworm.adapter
 
 import Book
 import OwnerFragment
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.Intent
@@ -29,24 +30,26 @@ import java.net.URI
 import java.net.URL
 import kotlin.coroutines.coroutineContext
 
-public class BookAdapter(owner: Fragment, open: () -> Unit): RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
+class BookAdapter(owner: Fragment, open: (book: Book) -> Unit): RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
 
     private val adapterOwner = owner
-    private val openDetails: () -> Unit = open
+    private val openDetails: (book: Book) -> Unit = open
     private var bookList: List<Book>? = null
 
-    public fun setItems(books: Collection<Book>) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun setItems(books: Collection<Book>) {
             bookList = books.toList()
             notifyDataSetChanged()
     }
 
-    public fun clearItems() {
+    @SuppressLint("NotifyDataSetChanged")
+    fun clearItems() {
         bookList = null
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
-        var view: View = LayoutInflater.from(parent.context).inflate(R.layout.book_card_fragment, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.book_card_fragment, parent, false)
         return  BookViewHolder(view, adapterOwner, openDetails)
     }
 
@@ -58,7 +61,8 @@ public class BookAdapter(owner: Fragment, open: () -> Unit): RecyclerView.Adapte
         return if (bookList != null) bookList?.size!! else 0
     }
 
-    class BookViewHolder: RecyclerView.ViewHolder {
+    class BookViewHolder(itemView: View, owner: Fragment, open: (book: Book) -> Unit) :
+        RecyclerView.ViewHolder(itemView) {
 
         private var bookImage: ImageView? = null
         private var bookName: TextView? = null
@@ -67,22 +71,21 @@ public class BookAdapter(owner: Fragment, open: () -> Unit): RecyclerView.Adapte
         private var favourite: ImageView? = null
         private var later: ImageView? = null
         private var card: MaterialCardView? = null
-        private var adapterOwner: Fragment? = null
-        private var openDetails: (() -> Unit)? = null
+        private var adapterOwner: Fragment? = owner
+        private var openDetails: ((book: Book) -> Unit)? = open
 
-       constructor(itemView: View, owner: Fragment, open: () -> Unit) : super(itemView) {
-           bookImage = itemView.findViewById(R.id.bookImage)
-           bookName = itemView.findViewById(R.id.bookNameText)
-           bookAuthor = itemView.findViewById(R.id.authorNameText)
-           bookPrice = itemView.findViewById(R.id.PriceText)
-           favourite = itemView.findViewById(R.id.favouriteIcon)
-           later = itemView.findViewById(R.id.laterIcon)
-           card = itemView.findViewById(R.id.bookCard)
-           adapterOwner = owner
-           openDetails = open
+        init {
+            bookImage = itemView.findViewById(R.id.bookImage)
+            bookName = itemView.findViewById(R.id.bookNameText)
+            bookAuthor = itemView.findViewById(R.id.authorNameText)
+            bookPrice = itemView.findViewById(R.id.PriceText)
+            favourite = itemView.findViewById(R.id.favouriteIcon)
+            later = itemView.findViewById(R.id.laterIcon)
+            card = itemView.findViewById(R.id.bookCard)
         }
 
-        public fun bind(book: Book) {
+        @SuppressLint("SetTextI18n")
+        fun bind(book: Book) {
             bookName?.text = if (book.Name.length > 25)
                 book.Name.substring(0, 22) + "..."
             else
@@ -94,8 +97,7 @@ public class BookAdapter(owner: Fragment, open: () -> Unit): RecyclerView.Adapte
                 book.Author
             bookPrice?.text = "$" + book.Price
 
-            var bookImg: Uri = Uri.parse(book.ImgSrc)
-
+            //var bookImg: Uri = Uri.parse(book.ImgSrc)
             //bookImage?.setImageURI(bookImg)
             bookImage?.setColorFilter((adapterOwner?.context?.getColor( R.color.teal_700))!!, PorterDuff.Mode.SRC_IN)
             bookImage?.setImageResource(R.drawable.ic_launcher_foreground)
@@ -135,7 +137,7 @@ public class BookAdapter(owner: Fragment, open: () -> Unit): RecyclerView.Adapte
             }
 
             card?.setOnClickListener {
-                openDetails
+                openDetails?.invoke(book)
             }
         }
     }

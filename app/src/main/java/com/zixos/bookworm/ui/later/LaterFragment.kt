@@ -51,7 +51,7 @@ class LaterFragment : Fragment() {
     private fun initRecyclerView() {
         booksRecyclerView = binding.booksRecyclerView
         booksRecyclerView?.layoutManager = LinearLayoutManager(booksRecyclerView?.context)
-        bookAdapter = BookAdapter(this, { toDetails() })
+        bookAdapter = BookAdapter(this, { b -> toDetails(b) })
         booksRecyclerView?.adapter = bookAdapter
     }
 
@@ -60,9 +60,16 @@ class LaterFragment : Fragment() {
         activityContext = context
     }
 
-    private fun toDetails()
+    private fun toDetails(bookInfo: Book)
     {
         val intent = Intent(activityContext, BookDetails::class.java)
+        intent.putExtra("name", bookInfo.Name)
+        intent.putExtra("imgSrc", bookInfo.ImgSrc)
+        intent.putExtra("author" ,bookInfo.Author)
+        intent.putExtra("description", bookInfo.Description)
+        intent.putExtra("price", bookInfo.Price)
+        intent.putExtra("favourite", bookInfo.Favourite)
+        intent.putExtra("later", bookInfo.Later)
         startActivity(intent)
     }
 

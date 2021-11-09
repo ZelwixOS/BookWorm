@@ -11,11 +11,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="@string/book_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -24,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="BookName"
+        android:text="@string/book_name"
         android:textColor="@color/black"
         android:textSize="34sp"
         android:textStyle="bold"
@@ -38,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="AuthorName"
+        android:text="@string/book_author"
         android:textColor="@color/grey_700"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="$100"
+        android:text="@string/book_price"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -65,6 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/favourite"
         app:layout_constraintStart_toStartOf="@+id/bookDNameText"
         app:layout_constraintTop_toBottomOf="@+id/bookDAuthorNameText"
         app:srcCompat="@drawable/ic_baseline_favorite_24" />
@@ -74,6 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:contentDescription="@string/later"
         app:layout_constraintStart_toEndOf="@+id/bookDFavourite"
         app:layout_constraintTop_toTopOf="@+id/bookDFavourite"
         app:srcCompat="@drawable/ic_baseline_watch_later_24" />
@@ -83,11 +84,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Code: 00000000"
+        android:text="@string/book_code"
+        android:textColor="@color/grey_600"
+        app:layout_constraintStart_toStartOf="@+id/bookDNameText"
+        app:layout_constraintTop_toBottomOf="@+id/bookDFavourite" />
+
+    <TextView
+        android:id="@+id/bookDCodeText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/book_code_value"
         android:textColor="@color/grey_600"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/bookDNameText"
+        app:layout_constraintStart_toEndOf="@+id/bookDCodeText"
         app:layout_constraintTop_toBottomOf="@+id/bookDFavourite" />
 
     <TextView
@@ -97,7 +109,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        android:text="@string/description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bookDCodeText" />

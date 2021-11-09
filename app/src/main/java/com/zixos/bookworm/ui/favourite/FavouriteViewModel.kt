@@ -12,13 +12,13 @@ class FavouriteViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    public fun getBooks(): Collection<Book> {
+    fun getBooks(): Collection<Book> {
         return setOf(
-            Book("Book1", "Author1", "100", "http://img2.joyreactor.cc/pics/post/it-%D1%8E%D0%BC%D0%BE%D1%80-geek-6974973.png", "",
+            Book("Book1", "Author1", "100", "http://img2.joyreactor.cc/pics/post/it-%D1%8E%D0%BC%D0%BE%D1%80-geek-6974973.png", "Lorem ipsum",
                 favourite = true,
                 later = false
             ),
-            Book("Book3", "Author3", "101", "http://img2.joyreactor.cc/pics/post/it-%D1%8E%D0%BC%D0%BE%D1%80-geek-6974973.png", "",
+            Book("Book3", "Author3", "101", "http://img2.joyreactor.cc/pics/post/it-%D1%8E%D0%BC%D0%BE%D1%80-geek-6974973.png", "SGrsgsgrsgsgsgewgrgwgwgwgg",
                 favourite = true,
                 later = true
             )
