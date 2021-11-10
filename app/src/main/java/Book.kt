@@ -1,22 +1,13 @@
 import java.text.DecimalFormat
 
-public class Book {
-    constructor(name: String, author: String, price: String, imgSrc: String, description: String, favourite: Boolean, later: Boolean)
-    {
-        Name = name
-        Author = author
-        Price = price
-        ImgSrc = imgSrc
-        Description = description
-        Favourite = favourite
-        Later = later
-    }
-
-    public var Name: String = ""
-    public var Author: String = ""
-    public var Price: String = ""
-    public var ImgSrc: String = ""
-    public var Description = ""
-    public var Favourite: Boolean = false
-    public  var Later: Boolean = false
+public class Book(id: Long?, name: String, author: String, price: String, imgSrc: String, description: String, code: String, favourite: Boolean, later: Boolean) {
+    val Id = id
+    val Name = name
+    val Author = author
+    val Price = price
+    val ImgSrc = imgSrc
+    val Description = description
+    val Code = code
+    val Favourite = favourite
+    val Later = later
 }

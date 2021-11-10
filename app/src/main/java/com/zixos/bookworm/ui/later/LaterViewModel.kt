@@ -4,25 +4,19 @@ import Book
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.zixos.bookworm.dal.DbContext
 
 class LaterViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+    fun getBooks(dbContext: DbContext): MutableList<Book> {
+        val books = dbContext.getBooks()
+        val items = mutableListOf<Book>()
+
+        for (book in books)
+            if (book.Later)
+                items.add(book)
+
+        return  items
     }
 
-    fun getBooks(): Collection<Book> {
-        return setOf(
-            Book("Book3", "Author3", "101", "http://img2.joyreactor.cc/pics/post/it-%D1%8E%D0%BC%D0%BE%D1%80-geek-6974973.png", "gSEFSEFGEGWEEFSergrsgsgsgesge  FAGSgsG",
-                favourite = true,
-                later = true
-            ),
-            Book("Book4444444444444444444444444444444444444444444444444444444444444444444444", "Author3", "101", "http://img2.joyreactor.cc/pics/post/it-%D1%8E%D0%BC%D0%BE%D1%80-geek-6974973.png", "pLACEholder",
-                favourite = false,
-                later = true
-            )
-        )
-    }
-
-    val text: LiveData<String> = _text
 }

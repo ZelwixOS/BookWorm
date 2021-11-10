@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zixos.bookworm.BookDetails
 import com.zixos.bookworm.adapter.BookAdapter
+import com.zixos.bookworm.dal.DbContext
 import com.zixos.bookworm.databinding.FragmentFavouriteBinding
 
 class FavouriteFragment : Fragment() {
@@ -22,6 +23,7 @@ class FavouriteFragment : Fragment() {
     private var booksRecyclerView: RecyclerView? = null
     private var activityContext: Context? = null
     private var bookAdapter: BookAdapter? = null
+    private var dbContext: DbContext? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -43,7 +45,7 @@ class FavouriteFragment : Fragment() {
     }
 
     private fun loadBooks() {
-        val books: Collection<Book> = this.favouriteViewModel.getBooks()
+        val books: Collection<Book> = this.favouriteViewModel?.getBooks(dbContext!!)
         bookAdapter?.setItems(books)
     }
 
@@ -69,6 +71,7 @@ class FavouriteFragment : Fragment() {
         intent.putExtra("price", bookInfo.Price)
         intent.putExtra("favourite", bookInfo.Favourite)
         intent.putExtra("later", bookInfo.Later)
+        intent.putExtra("code", bookInfo.Code)
         startActivity(intent)
     }
 

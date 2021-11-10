@@ -9,6 +9,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.zixos.bookworm.dal.DbContext
+import com.zixos.bookworm.dal.DbHelper
+import com.zixos.bookworm.dal.DbInitializer
 import com.zixos.bookworm.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +34,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_main, R.id.navigation_favourite, R.id.navigation_later
             )
         )
+
+        val dbContext = DbContext(this.applicationContext)
+        val initializer = DbInitializer()
+        initializer.InitDB(dbContext)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)

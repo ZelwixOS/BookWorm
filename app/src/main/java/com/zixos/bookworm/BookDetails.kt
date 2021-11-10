@@ -22,6 +22,7 @@ class BookDetails : AppCompatActivity() {
     private var bookName: TextView? = null
     private var bookAuthor: TextView? = null
     private var bookPrice: TextView? = null
+    private var bookCode: TextView? = null
     private var bookDescription: TextView? = null
     private var favourite: ImageView? = null
     private var later: ImageView? = null
@@ -31,7 +32,8 @@ class BookDetails : AppCompatActivity() {
         bookName = this.findViewById(R.id.bookDNameText)
         bookAuthor = this.findViewById(R.id.bookDAuthorNameText)
         bookPrice = this.findViewById(R.id.bookDPrice)
-        bookDescription = this.findViewById((R.id.bookDDescription))
+        bookDescription = this.findViewById(R.id.bookDDescription)
+        bookCode = this.findViewById(R.id.bookDCodeValueText)
         favourite = this.findViewById(R.id.bookDFavourite)
         later = this.findViewById(R.id.bookDLater)
     }
@@ -44,8 +46,8 @@ class BookDetails : AppCompatActivity() {
         bookName?.text = arguments?.getString("name")
         bookAuthor?.text = arguments?.getString("author")
         bookPrice?.text = "$" + arguments?.getString("price")
-
         bookDescription?.text = arguments?.getString("description")
+        bookCode?.text = arguments?.getString("code")
 
         if (arguments?.getBoolean("later") == true)
         {
@@ -57,6 +59,10 @@ class BookDetails : AppCompatActivity() {
             later?.setImageResource(R.drawable.ic_outline_watch_later_24)
         }
 
+        later?.setOnClickListener {
+            // Action
+        }
+
         if (arguments?.getBoolean("favourite") == true)
         {
             favourite?.setColorFilter((this.getColor( R.color.red_700)), PorterDuff.Mode.SRC_IN)
@@ -65,6 +71,10 @@ class BookDetails : AppCompatActivity() {
         else
         {
             favourite?.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+        }
+
+        favourite?.setOnClickListener {
+            // Action
         }
     }
 }
