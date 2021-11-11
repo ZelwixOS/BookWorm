@@ -1,12 +1,12 @@
 package com.zixos.bookworm
 
+import Book
 import android.annotation.SuppressLint
 import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 
 class BookDetails : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +27,8 @@ class BookDetails : AppCompatActivity() {
     private var favourite: ImageView? = null
     private var later: ImageView? = null
 
+    private var bookInfo: Book? = null
+
     private fun initComponentElements() {
         bookImage = this.findViewById(R.id.bookDImage)
         bookName = this.findViewById(R.id.bookDNameText)
@@ -38,32 +40,25 @@ class BookDetails : AppCompatActivity() {
         later = this.findViewById(R.id.bookDLater)
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun initElementsValue() {
-        bookImage?.setColorFilter((this.getColor( R.color.teal_700)), PorterDuff.Mode.SRC_IN)
-        bookImage?.setImageResource(R.drawable.ic_launcher_foreground)
+    private fun bookInit()
+    {
+        bookInfo = Book(
+            arguments?.getLong("id"),
+            arguments?.getString("name")!!,
+            arguments?.getString("author")!!,
+            arguments?.getString("price")!!,
+            arguments?.getString("ImgSrc")!!,
+            arguments?.getString("description")!!,
+            arguments?.getString("code")!!,
+            arguments?.getBoolean("favourite")!!,
+            arguments?.getBoolean("later")!!
+        )
+    }
 
-        bookName?.text = arguments?.getString("name")
-        bookAuthor?.text = arguments?.getString("author")
-        bookPrice?.text = "$" + arguments?.getString("price")
-        bookDescription?.text = arguments?.getString("description")
-        bookCode?.text = arguments?.getString("code")
-
-        if (arguments?.getBoolean("later") == true)
-        {
-            later?.setColorFilter((this.getColor( R.color.light_green_700)), PorterDuff.Mode.SRC_IN)
-            later?.setImageResource(R.drawable.ic_baseline_watch_later_24)
-        }
-        else
-        {
-            later?.setImageResource(R.drawable.ic_outline_watch_later_24)
-        }
-
-        later?.setOnClickListener {
-            // Action
-        }
-
-        if (arguments?.getBoolean("favourite") == true)
+    private fun setFavourite(fav: Boolean)
+    {
+        // DB updateStatus
+        if (fav)
         {
             favourite?.setColorFilter((this.getColor( R.color.red_700)), PorterDuff.Mode.SRC_IN)
             favourite?.setImageResource(R.drawable.ic_baseline_favorite_24)
@@ -72,9 +67,45 @@ class BookDetails : AppCompatActivity() {
         {
             favourite?.setImageResource(R.drawable.ic_baseline_favorite_border_24)
         }
+    }
+
+    private fun setLater(lat: Boolean)
+    {
+        // DB updateStatus
+        if (lat)
+        {
+            later?.setColorFilter((this.getColor( R.color.light_green_700)), PorterDuff.Mode.SRC_IN)
+            later?.setImageResource(R.drawable.ic_baseline_watch_later_24)
+        }
+        else
+        {
+            later?.setImageResource(R.drawable.ic_outline_watch_later_24)
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun initElementsValue() {
+        bookInit()
+        bookImage?.setColorFilter((this.getColor( R.color.teal_700)), PorterDuff.Mode.SRC_IN)
+        bookImage?.setImageResource(R.drawable.ic_launcher_foreground)
+
+        bookName?.text = bookInfo?.Name
+        bookAuthor?.text = bookInfo?.Author
+        bookPrice?.text = "$" + bookInfo?.Price
+        bookDescription?.text = bookInfo?.Description
+        bookCode?.text = bookInfo?.Code
+
+        setFavourite(bookInfo?.Favourite!!)
+        setLater(bookInfo?.Later!!)
+
+        later?.setOnClickListener {
+            bookInfo?.Later = !(bookInfo?.Later!!)
+            setLater(bookInfo?.Later!!)
+        }
 
         favourite?.setOnClickListener {
-            // Action
+            bookInfo?.Favourite = !(bookInfo?.Favourite!!)
+            setFavourite(bookInfo?.Favourite!!)
         }
     }
 }
