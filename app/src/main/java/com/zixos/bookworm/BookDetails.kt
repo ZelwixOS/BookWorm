@@ -43,7 +43,7 @@ class BookDetails : AppCompatActivity() {
     private fun bookInit()
     {
         bookInfo = Book(
-            arguments?.getLong("id"),
+            arguments?.getString("id"),
             arguments?.getString("name")!!,
             arguments?.getString("author")!!,
             arguments?.getString("price")!!,

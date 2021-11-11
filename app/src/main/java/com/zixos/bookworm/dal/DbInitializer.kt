@@ -1,13 +1,19 @@
 package com.zixos.bookworm.dal
 
 import Book
+import java.lang.Exception
 
 class DbInitializer {
 
     fun InitDB(db: DbContext)
     {
-        if (db.getBooks().count() < 1)
+        try {
+            db.getBooks()
+        }
+        catch (e: Exception)
+        {
             InitBooks(db)
+        }
     }
 
     fun InitBooks(db: DbContext)

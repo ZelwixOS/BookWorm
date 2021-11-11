@@ -21,6 +21,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val dbContext = DbContext(this.applicationContext)
+        val initializer = DbInitializer()
+        initializer.InitDB(dbContext)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -34,10 +38,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_main, R.id.navigation_favourite, R.id.navigation_later
             )
         )
-
-        val dbContext = DbContext(this.applicationContext)
-        val initializer = DbInitializer()
-        initializer.InitDB(dbContext)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)

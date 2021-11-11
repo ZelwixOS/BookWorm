@@ -68,15 +68,8 @@ class MainFragment : Fragment() {
 
     private fun toDetails(bookInfo: Book)
     {
-        val intent = Intent(activityContext, BookDetails::class.java)
-        intent.putExtra("name", bookInfo.Name)
-        intent.putExtra("imgSrc", bookInfo.ImgSrc)
-        intent.putExtra("author" ,bookInfo.Author)
-        intent.putExtra("description", bookInfo.Description)
-        intent.putExtra("price", bookInfo.Price)
-        intent.putExtra("favourite", bookInfo.Favourite)
-        intent.putExtra("later", bookInfo.Later)
-        intent.putExtra("code", bookInfo.Code)
+        var intent = Intent(activityContext, BookDetails::class.java)
+        intent = bookInfo.addDataToIntent(intent)
         startActivity(intent)
     }
 

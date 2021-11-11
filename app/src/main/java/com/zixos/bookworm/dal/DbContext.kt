@@ -37,10 +37,10 @@ class DbContext(context: Context) {
             Books.COLUMN_NAME_PRICE,
             Books.COLUMN_NAME_IMGSRC,
             Books.COLUMN_NAME_FAVOURITE,
-            Books.TABLE_NAME,
+            Books.COLUMN_NAME_LATER
         )
 
-        val sortOrder = "${Books.COLUMN_NAME_NAME} DESC"
+        val sortOrder = "${BaseColumns._ID} DESC"
 
         val cursor = db.query(
             Books.TABLE_NAME,
@@ -55,17 +55,17 @@ class DbContext(context: Context) {
         val items = mutableListOf<Book>()
         with(cursor) {
             while (moveToNext()) {
-                val itemId = getLong(getColumnIndexOrThrow(BaseColumns._ID))
+                val id = getString(getColumnIndexOrThrow(BaseColumns._ID))
                 val itemName = getString(getColumnIndexOrThrow(Books.COLUMN_NAME_NAME))
                 val itemAuthor = getString(getColumnIndexOrThrow(Books.COLUMN_NAME_AUTHOR))
                 val itemDescription= getString(getColumnIndexOrThrow(Books.COLUMN_NAME_DESCRIPTION))
                 val itemPrice = getString(getColumnIndexOrThrow(Books.COLUMN_NAME_PRICE))
                 val itemCode = getString(getColumnIndexOrThrow(Books.COLUMN_NAME_CODE))
                 val itemImgSrc = getString(getColumnIndexOrThrow(Books.COLUMN_NAME_IMGSRC))
-                val itemLater= getBoolean(getString(getColumnIndexOrThrow(Books.COLUMN_NAME_LATER)))
-                val itemFavourite= getBoolean(getString(getColumnIndexOrThrow(Books.COLUMN_NAME_FAVOURITE)))
+                val itemLater = getInt(getColumnIndexOrThrow(Books.COLUMN_NAME_LATER)) > 0
+                val itemFavourite= getInt(getColumnIndexOrThrow(Books.COLUMN_NAME_FAVOURITE)) > 0
 
-                items.add(Book(itemId, itemName, itemAuthor, itemPrice, itemImgSrc, itemDescription, itemCode, itemFavourite, itemLater))
+                items.add(Book(id, itemName, itemAuthor, itemPrice, itemImgSrc, itemDescription, itemCode, itemFavourite, itemLater))
             }
         }
         cursor.close()
