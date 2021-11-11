@@ -39,6 +39,8 @@ class FavouriteFragment : Fragment() {
         _binding = FragmentFavouriteBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        dbContext = DbContext(this.requireContext())
+
         initRecyclerView()
         loadBooks()
         return root
@@ -64,7 +66,7 @@ class FavouriteFragment : Fragment() {
     private fun toDetails(bookInfo: Book)
     {
         var intent = Intent(activityContext, BookDetails::class.java)
-        intent = bookInfo.addDataToIntent(intent)
+        bookInfo.addDataToIntent(intent)
         startActivity(intent)
     }
 

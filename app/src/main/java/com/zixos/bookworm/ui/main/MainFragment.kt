@@ -69,7 +69,6 @@ class MainFragment : Fragment() {
     private fun toDetails(bookInfo: Book)
     {
         var intent = Intent(activityContext, BookDetails::class.java)
-        intent = bookInfo.addDataToIntent(intent)
         startActivity(intent)
     }
 

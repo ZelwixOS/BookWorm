@@ -7,10 +7,7 @@ class DbInitializer {
 
     fun InitDB(db: DbContext)
     {
-        try {
-            db.getBooks()
-        }
-        catch (e: Exception)
+        if (db.getBooks().count() < 1)
         {
             InitBooks(db)
         }

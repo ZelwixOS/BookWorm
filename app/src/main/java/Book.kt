@@ -12,7 +12,7 @@ public class Book(id: String?, name: String, author: String, price: String, imgS
     var Favourite = favourite
     var Later = later
 
-    fun addDataToIntent(intent: Intent): Intent {
+    fun addDataToIntent(intent: Intent) {
         intent.putExtra("id", this.Id)
         intent.putExtra("name", this.Name)
         intent.putExtra("imgSrc", this.ImgSrc)
@@ -22,6 +22,5 @@ public class Book(id: String?, name: String, author: String, price: String, imgS
         intent.putExtra("favourite", this.Favourite)
         intent.putExtra("later", this.Later)
         intent.putExtra("code", this.Code)
-        return intent
     }
 }

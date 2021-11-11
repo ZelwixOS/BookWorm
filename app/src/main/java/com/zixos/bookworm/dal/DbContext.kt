@@ -40,7 +40,7 @@ class DbContext(context: Context) {
             Books.COLUMN_NAME_LATER
         )
 
-        val sortOrder = "${BaseColumns._ID} DESC"
+        val sortOrder = "${Books.COLUMN_NAME_NAME} ASC"
 
         val cursor = db.query(
             Books.TABLE_NAME,
