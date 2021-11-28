@@ -23,7 +23,6 @@ class LaterFragment : Fragment() {
     private var booksRecyclerView: RecyclerView? = null
     private var activityContext: Context? = null
     private var bookAdapter: BookAdapter? = null
-    private var dbContext: DbContext? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -39,16 +38,19 @@ class LaterFragment : Fragment() {
         _binding = FragmentLaterBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        dbContext = DbContext(this.requireContext())
-
         initRecyclerView()
         loadBooks()
 
         return root
     }
 
+    override fun onStart() {
+        super.onStart()
+        loadBooks()
+    }
+
     private fun loadBooks() {
-        val books: Collection<Book> = this.laterViewModel.getBooks(dbContext!!)
+        val books: List<Book> = this.laterViewModel.getBooks()
         bookAdapter?.setItems(books)
     }
 

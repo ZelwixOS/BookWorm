@@ -7,11 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import com.zixos.bookworm.dal.DbContext
+import kotlinx.coroutines.*
 
 class BookDetails : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_details)
+        dbContext = DbContext(this.applicationContext)
         arguments = intent.extras
         initComponentElements()
         initElementsValue()
@@ -29,6 +32,8 @@ class BookDetails : AppCompatActivity() {
 
     private var bookInfo: Book? = null
 
+    private var dbContext: DbContext? = null
+
     private fun initComponentElements() {
         bookImage = this.findViewById(R.id.bookDImage)
         bookName = this.findViewById(R.id.bookDNameText)
@@ -43,11 +48,11 @@ class BookDetails : AppCompatActivity() {
     private fun bookInit()
     {
         bookInfo = Book(
-            arguments?.getString("id"),
+            arguments?.getString("id")!!,
             arguments?.getString("name")!!,
             arguments?.getString("author")!!,
             arguments?.getString("price")!!,
-            arguments?.getString("ImgSrc")!!,
+            arguments?.getString("imgSrc")!!,
             arguments?.getString("description")!!,
             arguments?.getString("code")!!,
             arguments?.getBoolean("favourite")!!,
@@ -58,6 +63,8 @@ class BookDetails : AppCompatActivity() {
     private fun setFavourite(fav: Boolean)
     {
         // DB updateStatus
+        bookInfo?.Favourite = fav
+
         if (fav)
         {
             favourite?.setColorFilter((this.getColor( R.color.red_700)), PorterDuff.Mode.SRC_IN)
@@ -66,12 +73,16 @@ class BookDetails : AppCompatActivity() {
         else
         {
             favourite?.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+            favourite?.setColorFilter((this.getColor( R.color.grey_700)), PorterDuff.Mode.SRC_IN)
         }
+        dbContext?.putStatusBook(bookInfo!!)
     }
 
     private fun setLater(lat: Boolean)
     {
         // DB updateStatus
+
+        bookInfo?.Later = lat
         if (lat)
         {
             later?.setColorFilter((this.getColor( R.color.light_green_700)), PorterDuff.Mode.SRC_IN)
@@ -80,7 +91,9 @@ class BookDetails : AppCompatActivity() {
         else
         {
             later?.setImageResource(R.drawable.ic_outline_watch_later_24)
+            later?.setColorFilter((this.getColor( R.color.grey_700)), PorterDuff.Mode.SRC_IN)
         }
+        dbContext?.putStatusBook(bookInfo!!)
     }
 
     @SuppressLint("SetTextI18n")
@@ -88,6 +101,8 @@ class BookDetails : AppCompatActivity() {
         bookInit()
         bookImage?.setColorFilter((this.getColor( R.color.teal_700)), PorterDuff.Mode.SRC_IN)
         bookImage?.setImageResource(R.drawable.ic_launcher_foreground)
+
+        bookInfo?.SetImageFromInternet(bookImage!!)?.execute()
 
         bookName?.text = bookInfo?.Name
         bookAuthor?.text = bookInfo?.Author

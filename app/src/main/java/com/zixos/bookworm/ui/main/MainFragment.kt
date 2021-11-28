@@ -23,7 +23,6 @@ class MainFragment : Fragment() {
     private var booksRecyclerView: RecyclerView? = null
     private var activityContext: Context? = null
     private var bookAdapter: BookAdapter? = null
-    private var dbContext: DbContext? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -40,16 +39,19 @@ class MainFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        dbContext = DbContext(this.requireContext())
-
         initRecyclerView()
         loadBooks()
 
         return root
     }
 
+    override fun onStart() {
+        super.onStart()
+        loadBooks()
+    }
+
     private fun loadBooks() {
-        val books: Collection<Book> = this.mainViewModel.getBooks(dbContext!!)
+        val books: List<Book> = this.mainViewModel.getBooks()
         bookAdapter?.setItems(books)
     }
 
@@ -69,6 +71,7 @@ class MainFragment : Fragment() {
     private fun toDetails(bookInfo: Book)
     {
         var intent = Intent(activityContext, BookDetails::class.java)
+        bookInfo.addDataToIntent(intent)
         startActivity(intent)
     }
 

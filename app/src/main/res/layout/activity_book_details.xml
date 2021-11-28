@@ -6,111 +6,125 @@
     android:layout_height="match_parent"
     tools:context=".BookDetails">
 
-    <ImageView
-        android:id="@+id/bookDImage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/book_name"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/bookDNameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/book_name"
-        android:textColor="@color/black"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookDImage" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/bookDAuthorNameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/book_author"
-        android:textColor="@color/grey_700"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/bookDNameText"
-        app:layout_constraintTop_toBottomOf="@+id/bookDNameText" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/bookDPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="@string/book_price"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/bookDLater"
-        app:layout_constraintTop_toBottomOf="@+id/bookDAuthorNameText" />
+                <TextView
+                    android:id="@+id/bookDCodeValueText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/book_code_value"
+                    android:textColor="@color/grey_600"
+                    app:layout_constraintBottom_toBottomOf="@+id/bookDCodeText"
+                    app:layout_constraintStart_toEndOf="@+id/bookDCodeText" />
 
-    <ImageView
-        android:id="@+id/bookDFavourite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/favourite"
-        app:layout_constraintStart_toStartOf="@+id/bookDNameText"
-        app:layout_constraintTop_toBottomOf="@+id/bookDAuthorNameText"
-        app:srcCompat="@drawable/ic_baseline_favorite_24" />
+                <ImageView
+                    android:id="@+id/bookDLater"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:contentDescription="@string/later"
+                    app:layout_constraintBottom_toBottomOf="@+id/bookDFavourite"
+                    app:layout_constraintStart_toEndOf="@+id/bookDFavourite"
+                    app:srcCompat="@drawable/ic_baseline_watch_later_24" />
 
-    <ImageView
-        android:id="@+id/bookDLater"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:contentDescription="@string/later"
-        app:layout_constraintStart_toEndOf="@+id/bookDFavourite"
-        app:layout_constraintTop_toTopOf="@+id/bookDFavourite"
-        app:srcCompat="@drawable/ic_baseline_watch_later_24" />
+                <ImageView
+                    android:id="@+id/bookDFavourite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:contentDescription="@string/favourite"
+                    app:layout_constraintStart_toStartOf="@+id/bookDAuthorNameText"
+                    app:layout_constraintTop_toBottomOf="@+id/bookDAuthorNameText"
+                    app:srcCompat="@drawable/ic_baseline_favorite_24" />
 
-    <TextView
-        android:id="@+id/bookDCodeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/book_code"
-        android:textColor="@color/grey_600"
-        app:layout_constraintStart_toStartOf="@+id/bookDNameText"
-        app:layout_constraintTop_toBottomOf="@+id/bookDFavourite" />
+                <TextView
+                    android:id="@+id/bookDNameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/book_name"
+                    android:textColor="@color/black"
+                    android:textSize="34sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/bookDImage"
+                    app:layout_constraintTop_toBottomOf="@+id/bookDImage" />
 
-    <TextView
-        android:id="@+id/bookDCodeValueText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/book_code_value"
-        android:textColor="@color/grey_600"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/bookDCodeText"
-        app:layout_constraintTop_toBottomOf="@+id/bookDFavourite" />
+                <ImageView
+                    android:id="@+id/bookDImage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:contentDescription="@string/book_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/bookDDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookDCodeText" />
+                <TextView
+                    android:id="@+id/bookDPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:text="@string/book_price"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/bookDCodeValueText"
+                    app:layout_constraintTop_toTopOf="@+id/bookDLater" />
+
+                <TextView
+                    android:id="@+id/bookDCodeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/book_code"
+                    android:textColor="@color/grey_600"
+                    app:layout_constraintStart_toStartOf="@+id/bookDAuthorNameText"
+                    app:layout_constraintTop_toBottomOf="@+id/bookDFavourite" />
+
+                <TextView
+                    android:id="@+id/bookDDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/description"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bookDCodeValueText" />
+
+                <TextView
+                    android:id="@+id/bookDAuthorNameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/book_author"
+                    android:textColor="@color/grey_700"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="@+id/bookDNameText"
+                    app:layout_constraintTop_toBottomOf="@+id/bookDNameText" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

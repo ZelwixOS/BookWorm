@@ -4,6 +4,7 @@ import Book
 import android.content.ContentValues
 import android.content.Context
 import android.provider.BaseColumns
+import androidx.lifecycle.LiveData
 import com.zixos.bookworm.dal.DbEntities.Books
 import java.lang.Boolean.getBoolean
 
@@ -25,7 +26,7 @@ class DbContext(context: Context) {
         val newRowId = db?.insert(Books.TABLE_NAME, null, values)
     }
 
-    fun getBooks(): MutableList<Book> {
+    fun getBooks(): List<Book> {
         val db = dbHelper.readableDatabase
 
         val projection = arrayOf(
@@ -70,7 +71,7 @@ class DbContext(context: Context) {
         }
         cursor.close()
 
-        return items
+        return items.toList()
     }
 
     fun putStatusBook(book: Book) {

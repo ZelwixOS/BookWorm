@@ -19,6 +19,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.zixos.bookworm.BookDetails
@@ -37,8 +38,8 @@ class BookAdapter(owner: Fragment, open: (book: Book) -> Unit): RecyclerView.Ada
     private var bookList: List<Book>? = null
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setItems(books: Collection<Book>) {
-            bookList = books.toList()
+    fun setItems(books: List<Book>) {
+            bookList = books
             notifyDataSetChanged()
     }
 
@@ -102,6 +103,8 @@ class BookAdapter(owner: Fragment, open: (book: Book) -> Unit): RecyclerView.Ada
             bookImage?.setColorFilter((adapterOwner?.context?.getColor( R.color.teal_700))!!, PorterDuff.Mode.SRC_IN)
             bookImage?.setImageResource(R.drawable.ic_launcher_foreground)
 
+            book?.SetImageFromInternet(bookImage!!)?.execute()
+
             if (adapterOwner !is FavouriteFragment)
             {
                 if (book.Favourite)
@@ -111,6 +114,7 @@ class BookAdapter(owner: Fragment, open: (book: Book) -> Unit): RecyclerView.Ada
                 }
                 else
                 {
+                    favourite?.setColorFilter((adapterOwner?.context?.getColor( R.color.grey_700))!!, PorterDuff.Mode.SRC_IN)
                     favourite?.setImageResource(R.drawable.ic_baseline_favorite_border_24)
                 }
             }
@@ -128,6 +132,7 @@ class BookAdapter(owner: Fragment, open: (book: Book) -> Unit): RecyclerView.Ada
                 }
                 else
                 {
+                    later?.setColorFilter((adapterOwner?.context?.getColor( R.color.grey_700))!!, PorterDuff.Mode.SRC_IN)
                     later?.setImageResource(R.drawable.ic_outline_watch_later_24)
                 }
             }

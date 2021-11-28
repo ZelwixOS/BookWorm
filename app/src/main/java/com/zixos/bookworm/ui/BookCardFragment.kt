@@ -1,12 +1,16 @@
 package com.zixos.bookworm.ui
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zixos.bookworm.R
+import android.graphics.drawable.Drawable
+import java.io.InputStream
+import java.lang.Exception
+import java.net.URL
+
 
 class BookCardFragment : Fragment() {
 
@@ -22,5 +26,4 @@ class BookCardFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
     }
-
 }

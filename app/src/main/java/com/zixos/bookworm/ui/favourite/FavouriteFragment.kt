@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,9 +25,7 @@ class FavouriteFragment : Fragment() {
     private var booksRecyclerView: RecyclerView? = null
     private var activityContext: Context? = null
     private var bookAdapter: BookAdapter? = null
-    private var dbContext: DbContext? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -39,15 +39,18 @@ class FavouriteFragment : Fragment() {
         _binding = FragmentFavouriteBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        dbContext = DbContext(this.requireContext())
-
         initRecyclerView()
-        loadBooks()
+
         return root
     }
 
+    override fun onStart() {
+        super.onStart()
+        loadBooks()
+    }
+
     private fun loadBooks() {
-        val books: Collection<Book> = this.favouriteViewModel?.getBooks(dbContext!!)
+        val books: List<Book> = this.favouriteViewModel.getBooks()
         bookAdapter?.setItems(books)
     }
 
